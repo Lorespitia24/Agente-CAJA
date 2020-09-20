@@ -40,10 +40,10 @@ public class Waiter{
 	}
 
 
-	public Waiter(Integer waiter) {
+	public Waiter(Integer waiter, int scoreWaiter) {
 		super();
 		this.waiter = waiter;
-		this.scoreWaiter = 0;
+		this.scoreWaiter = scoreWaiter;
 		this.tip = 0.0;
 	}
 

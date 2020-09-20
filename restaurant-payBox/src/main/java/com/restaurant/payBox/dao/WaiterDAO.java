@@ -1,9 +1,17 @@
 package com.restaurant.payBox.dao;
 
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.restaurant.payBox.entity.Waiter;
+
 /**
  *
  * @author Juliana Barrera, Lorena Espitia, Felipe García,Nicolás Ramos, Lina Sanabria
  */
-public class WaiterDAO {
-
+@Repository
+public interface WaiterDAO extends JpaRepository<Waiter, Long> {
+	public List<Waiter> findByWaiter(Integer waiter);
 }

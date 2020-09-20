@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 import com.restaurant.payBox.dao.BillDAO;
 import com.restaurant.payBox.dao.OrderClientDAO;
 import com.restaurant.payBox.dao.PlateDAO;
+import com.restaurant.payBox.dao.WaiterDAO;
 import com.restaurant.payBox.entity.Bill;
+import com.restaurant.payBox.entity.ClientRestaurant;
 import com.restaurant.payBox.entity.OrderClient;
 import com.restaurant.payBox.entity.Plate;
 import com.restaurant.payBox.entity.Waiter;
@@ -28,10 +30,12 @@ public class BillService {
 	private OrderClientDAO orderClientDAO;
 	private PlateDAO plateDAO;
 	private BillDAO billDAO;
-	public BillService(OrderClientDAO orderClientDAO, PlateDAO plateDAO, BillDAO billDAO) {
+	private WaiterDAO waiterDAO;
+	public BillService(OrderClientDAO orderClientDAO, PlateDAO plateDAO, BillDAO billDAO,WaiterDAO waiterDAO) {
 		this.plateDAO = plateDAO;
 		this.orderClientDAO = orderClientDAO;
 		this.billDAO = billDAO;
+		this.waiterDAO =waiterDAO;
 	}	
 
 	
@@ -65,10 +69,16 @@ public class BillService {
 		orderClientNew.setOrderClient(orderClient.getOrderClient());
 		orderClientNew.setTypeBill(orderClient.getTypeBill());
 		orderClientNew.setTypePayment(orderClient.getTypePayment());
-		orderClientNew.setWaiter(new Waiter(orderClient.getWaiter().getWaiter()));
+		orderClientNew.setWaiter(new Waiter(orderClient.getWaiter().getWaiter(), 
+				orderClient.getWaiter().getScoreWaiter()));
+		if(orderClient.getWaiter().getWaiter() == 1) {
+			getWaiter1(orderClient.getWaiter().getScoreWaiter());
+		}else if (orderClient.getWaiter().getWaiter() == 2) {
+			getWaiter2(orderClient.getWaiter().getScoreWaiter());
+		}
 		orderClientNew.setDate(orderClient.getDate());
 		orderClientNew.setTips(orderClient.isTips());
-		//		orderClientNew.setClient(new Client(orderClient.getClient().getIdClient()));
+		orderClientNew.setClient(new ClientRestaurant(orderClient.getClient().getClient()));
 		for (Plate plate : orderClient.getPlateList()) {
 			orderClientNew.getPlateList().add(createPlate(plate).getBody());
 		}
@@ -116,11 +126,26 @@ public class BillService {
 	public ResponseEntity<List<Bill>> getAllBills() {
 		List<Bill> billList = billDAO.findAll();
 		billList.size();
-		System.out.println("Yo me imprimo:"+totalRestaurantIncome(billList));
-		setTipToWaiter(billList.get(0));
+		
+		setTipToWaiter(billList);
+		System.out.println("Ganancias por dia:"+totalRestaurantIncome(billList));
 		//		System.out.println(totalRestaurantIncome(billList));
 		return ResponseEntity.ok(billList);
 
+	}
+	
+	public ResponseEntity<List<Waiter>> getAllWaitEntity() {
+		List<Waiter> waiters = waiterDAO.findAll();
+		List<Waiter> aux= new ArrayList<>();
+//		calculateScoreWaiter();
+		int auxID = 0;
+		for (int i = 0; i < waiters.size(); i++) {
+			if (waiters.get(i).getWaiter() != auxID) {
+				auxID = waiters.get(i).getWaiter();
+				aux.add(waiters.get(i));
+			}
+		}
+		return ResponseEntity.ok(aux);
 	}
 
 	/**
@@ -149,12 +174,8 @@ public class BillService {
 			localDate = listBills.get(i).getDate();
 			if ((localDate).equals(listBills.get(i).getDate())) {
 				total = listBills.get(i).getTotal();
-				System.out.println("-->"+ total);
-				System.out.println("Fecha:"+localDate);
 				if (mapBillIncome.containsKey(listBills.get(i).getDate())) {
-					System.out.println("holllllllaaaaa");
 					total += mapBillIncome.get(localDate);
-					System.out.println("Aqui suma:"+total);
 					mapBillIncome.remove(localDate);
 					mapBillIncome.put(localDate, total);
 				}else {
@@ -166,15 +187,30 @@ public class BillService {
 	}
 	
 	/**
-	 * MÃ©todo que le asigna la propina al mesero
+	 * Metodo que le asigna la propina al mesero
 	 */
-	public void setTipToWaiter(Bill bill) {
-		if (bill.isTips() == true) {
-			for (OrderClient orderClient: bill.getOrderClientList()) {
-				
-				orderClient.getWaiter().setTip(orderClient.getWaiter().getTip()+calculateTipWaiter(bill.getTotal()));
-				System.out.println(orderClient.getWaiter().getTip() +"----"+orderClient.getWaiter().getTip());
+	public void setTipToWaiter(List<Bill> bill) {
+		double total = 0;
+		for (int i = 0; i < bill.size(); i++) {
+			total = calculateTipWaiter(bill.get(i).getTotal());
+			for (OrderClient orderClient : bill.get(i).getOrderClientList()) {
+				if (bill.get(i).isTips() == true) {
+					if (orderClient.getWaiter().getWaiter() == 1) {
+						System.out.println("--> Aqui"+total);
+						setTips(waiterDAO.findByWaiter(1), total);
+					}else if (orderClient.getWaiter().getWaiter() == 2) {
+						setTips(waiterDAO.findByWaiter(2), total);
+					}
+					
+				}
 			}
+		}
+	}
+	
+	public void setTips(List<Waiter> waiters, double tips) {
+		for (Waiter waiter : waiters) {
+			waiter.setTip(waiter.getTip() + tips);
+			waiterDAO.save(waiter);
 		}
 	}
 
@@ -182,63 +218,48 @@ public class BillService {
 	 * Este metodo calcula la propina del cajero
 	 */
 	public double calculateTipWaiter(double total) {
-		int totalTip = 0;
+		double totalTip = 0;
 		totalTip += ((total *10)/100);
 		return totalTip;
 	}
 
+	public void calculateScoreWaiter() {
+		List<Waiter> waiters = waiterDAO.findAll();
+		int total1 = 0;
+		int total2 = 0;
+		for (Waiter waiter : waiters) {
+			if (waiter.getWaiter()==1) {
+				total1 += waiter.getScoreWaiter();
+				waiter.setScoreWaiter(total1);
+				waiterDAO.save(waiter);
+			}else if (waiter.getWaiter()==2) {
+				total2 += waiter.getScoreWaiter();
+				waiter.setScoreWaiter(total2);
+				System.out.println("Holiii-->"+total2);
+				waiterDAO.save(waiter);
+			}
+//			waiterDAO.save(waiter);
+		}
+	}
 	
-//	public Map<Object, Double> sumCalificationWaiter(List<Bill> listBills) {
-//		int total = 0;
-//		Waiter waiter = null;
-//		Map<Object, Double> mapBillIncome = new HashMap<Object, Double>();
-//		for (int i = 0; i < listBills.size(); i++) {
-//			waiter = listBills.get(i).getDate();
-//			if ((waiter).equals(listBills.get(i).getDate())) {
-//				total = listBills.get(i).getTotal();
-//				System.out.println("-->"+ total);
-//				System.out.println("Fecha:"+localDate);
-//				if (mapBillIncome.containsKey(listBills.get(i).getDate())) {
-//					System.out.println("holllllllaaaaa");
-//					total += mapBillIncome.get(waiter);
-//					System.out.println("Aqui suma:"+total);
-//					mapBillIncome.remove(waiter);
-//					mapBillIncome.put(waiter, total);
-//				}else {
-//					mapBillIncome.put(waiter, total);
-//				}
-//			}
-//		}
-//		return mapBillIncome;
-//
-//	}
-//	
-//	/**
-//	 * Mesero con mejor calificación diaria
-//	 */
-//	public  Map<Integer, Double>  bestScoreWaiter(List<Bill> listBills) {
-//		int total = 0;
-//		LocalDate localDate = null;
-//		Map<LocalDate, Double> mapBillIncome = new HashMap<LocalDate, Double>();
-//		for (int i = 0; i < listBills.size(); i++) {
-//			localDate = listBills.get(i).getDate();
-//			if ((localDate).equals(listBills.get(i).getDate())) {
-//				total = listBills.get(i).getTotal();
-//				System.out.println("-->"+ total);
-//				System.out.println("Fecha:"+localDate);
-//				if (mapBillIncome.containsKey(listBills.get(i).getDate())) {
-//					System.out.println("holllllllaaaaa");
-//					total += mapBillIncome.get(localDate);
-//					System.out.println("Aqui suma:"+total);
-//					mapBillIncome.remove(localDate);
-//					mapBillIncome.put(localDate, total);
-//				}else {
-//					mapBillIncome.put(localDate, total);
-//				}
-//			}
-//		}
-//		return mapBillIncome;
-//	}
+	public void getWaiter1(int score) {
+		List<Waiter> list = waiterDAO.findByWaiter(1);
+		for (Waiter waiter : list) {
+			score += waiter.getScoreWaiter();
+			waiter.setScoreWaiter(score);
+			waiterDAO.save(waiter);
+		}
+	}
+	
+	public void getWaiter2(int score) {
+		List<Waiter> list = waiterDAO.findByWaiter(2);
+		for (Waiter waiter : list) {
+			score += waiter.getScoreWaiter();
+			waiter.setScoreWaiter(score);
+			waiterDAO.save(waiter);
+		}
+	}
+
 	
 	/**
 	 * Este metodo muestra el plato más vendido por dia

@@ -35,6 +35,7 @@ public class OrderClient {
 	private LocalDate date = LocalDate.now();
 	
 	@Column(name = "typeBill")
+	@Enumerated(value = EnumType.STRING)
     private TypeBill typeBill; //tipo de pago
 
 	@Column(name = "orderClient")
@@ -54,7 +55,7 @@ public class OrderClient {
 	
 	@OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "idClient")
-	private Client client; //cliente
+	private ClientRestaurant clientRestaurant; //cliente
 
 	@Column(name = "tips")
     private boolean tips; //entregada la factura
@@ -64,13 +65,13 @@ public class OrderClient {
 	}
 
 	public OrderClient(Integer orderClient, TypeBill typeBill, Waiter waiter,
-			TypePayment typePayment, Client client) {
+			TypePayment typePayment, ClientRestaurant client) {
 		super();
 		this.orderClient = orderClient;
 		this.typeBill = typeBill;
 		this.waiter = waiter;
 		this.typePayment = typePayment;
-		this.client = client;
+		this.clientRestaurant = client;
 	}
 
 	public Long getIdOrder() {
@@ -121,12 +122,12 @@ public class OrderClient {
 		this.typePayment = typePayment;
 	}
 
-	public Client getClient() {
-		return client;
+	public ClientRestaurant getClient() {
+		return clientRestaurant;
 	}
 
-	public void setClient(Client client) {
-		this.client = client;
+	public void setClient(ClientRestaurant client) {
+		this.clientRestaurant = client;
 	}
 
 
@@ -149,7 +150,7 @@ public class OrderClient {
 	@Override
 	public String toString() {
 		return "OrderClient [idOrderClient="  + ", typeBill=" + typeBill + ", plateList=" + plateList
-				+ ", waiter=" + waiter + ", typePayment=" + typePayment  + ", client=" + client + "]";
+				+ ", waiter=" + waiter + ", typePayment=" + typePayment  + ", client=" + clientRestaurant + "]";
 	}
 
 	

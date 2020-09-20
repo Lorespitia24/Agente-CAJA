@@ -1,20 +1,23 @@
 package com.restaurant.payBox.REST;
 
+import java.io.Console;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 
+import javax.swing.text.html.HTMLEditorKit.LinkController;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.info.ProjectInfoProperties.Build;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.restaurant.payBox.dao.ATM_DAO;
 import com.restaurant.payBox.dao.BillDAO;
@@ -22,7 +25,7 @@ import com.restaurant.payBox.dao.OrderClientDAO;
 import com.restaurant.payBox.dao.PlateDAO;
 import com.restaurant.payBox.entity.ATM;
 import com.restaurant.payBox.entity.Bill;
-import com.restaurant.payBox.entity.Client;
+import com.restaurant.payBox.entity.ClientRestaurant;
 import com.restaurant.payBox.entity.OrderClient;
 import com.restaurant.payBox.entity.Plate;
 import com.restaurant.payBox.entity.TypeBill;
@@ -45,9 +48,14 @@ private BillService billService;
 public PayBoxREST(BillService billService) {
 	this.billService = billService;
 }
+private Logger logger = LogManager.getLogger(LinkController.class);
+
 	
 	@Autowired
 	private ATM_DAO atmDAO;
+	
+//	@Autowired
+//	private RestTemplate restTemplate;
 //	@Autowired
 //	private BillDAO billDAO;
 //	@Autowired
@@ -71,8 +79,9 @@ public PayBoxREST(BillService billService) {
 	
 	
 	@PostMapping("/createOrder")
-	public ResponseEntity<OrderClient> createPlate(@RequestBody OrderClient orderClient) {
-		return billService.createOrder(orderClient);
+	public ResponseEntity<OrderClient> createPlate(@RequestBody OrderClient url) {
+//		OrderClient orderClient2 = restTemplate.getForObject("https://"+url, OrderClient.class);
+		return billService.createOrder(url);
 	}
 	
 	@PostMapping("/createBill")
@@ -85,10 +94,22 @@ public PayBoxREST(BillService billService) {
 	return billService.getAllOrdersClient();
 	}
 	
-	@GetMapping("/totalIncome")
-	public ResponseEntity<List<Bill>> totalRestaurantIncome() {
+	@GetMapping("/totalBill")
+	public ResponseEntity<List<Bill>> totalRestaurant() {
 		return billService.getAllBills();
 	}
 	
+	@GetMapping("/totalIncome")
+	public void totalIncome(){
+		logger.debug("message"+ billService.totalRestaurantIncome(billService.getAllBills().getBody()).toString());
+
+		
+	}
+	
+	@GetMapping("/waiterTips")
+	public ResponseEntity<List<Waiter>> waiterTips(){
+		return billService.getAllWaitEntity();
+	}
+		
 	
 }
