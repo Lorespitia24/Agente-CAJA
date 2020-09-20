@@ -1,0 +1,8 @@
+package com.restaurant.payBox.service;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class BillService {
+
+}

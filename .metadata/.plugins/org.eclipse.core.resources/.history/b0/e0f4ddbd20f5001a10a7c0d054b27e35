@@ -1,0 +1,16 @@
+package com.restaurant.payBox.entity;
+
+/**
+ *
+ * @author Juliana Barrera, Lorena Espitia, Felipe García, Lina Sanabria
+ */
+
+public class ATM {
+
+	private int idAtm; //ID del cajero
+	private boolean occupied; //está ocupado el cajero
+	private WorkingDay workingDay; //jornada de trabajo del cajero
+
+	
+	
+}

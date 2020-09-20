@@ -1,0 +1,160 @@
+package com.restaurant.payBox.service;
+
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.restaurant.payBox.dao.BillDAO;
+import com.restaurant.payBox.dao.OrderClientDAO;
+import com.restaurant.payBox.dao.PlateDAO;
+import com.restaurant.payBox.entity.Bill;
+import com.restaurant.payBox.entity.OrderClient;
+import com.restaurant.payBox.entity.Plate;
+import com.restaurant.payBox.entity.Waiter;
+
+/**
+ *
+ * @author Juliana Barrera, Lorena Espitia, Felipe García, Lina Sanabria
+ */
+@Service
+public class BillService {
+
+	private OrderClientDAO orderClientDAO;
+	private PlateDAO plateDAO;
+	private BillDAO billDAO;
+	public BillService(OrderClientDAO orderClientDAO, PlateDAO plateDAO, BillDAO billDAO) {
+		this.plateDAO = plateDAO;
+		this.orderClientDAO = orderClientDAO;
+		this.billDAO = billDAO;
+	}	
+
+	public ResponseEntity<Bill> createBill(List<OrderClient> orderList) {
+		Bill billNew = new Bill();
+		billNew.setOrderClientList(orderList);
+		billNew.setDelivered(true);//cambiar estado
+		billNew.setTotal(totalBill(billNew.getOrderClientList()));//llamar al metodo totalizar factura
+
+		Bill saveBill = billDAO.save(billNew);
+		if(billDAO.findById(saveBill.getIdBill()).isPresent()) {
+			return ResponseEntity.ok(saveBill);
+		}else 
+			return ResponseEntity.noContent().build();
+
+	}
+	/**
+	 * crear ordenes 
+	 * @param plateList
+	 * @return
+	 */
+	public ResponseEntity<OrderClient> createOrder(OrderClient orderClient) {
+		OrderClient orderClientNew = new OrderClient();
+		orderClientNew.setIdOrderClient(orderClient.getIdOrderClient());
+		orderClientNew.setTypeBill(orderClient.getTypeBill());
+		orderClientNew.setTypePayment(orderClient.getTypePayment());
+		orderClientNew.setQualificationPlate(orderClient.getQualificationPlate());
+		orderClientNew.setQualificationWaiter(orderClient.getQualificationWaiter());
+		orderClientNew.setWaiter(new Waiter(orderClient.getWaiter().getId_waiter()));
+		//		orderClientNew.setClient(new Client(orderClient.getClient().getIdClient()));
+		orderClientNew.setPlateList(orderClient.getPlateList());
+		createPlate(orderClientNew.getPlateList());
+		OrderClient saveOrderClient = orderClientDAO.save(orderClientNew);
+		if(orderClientDAO.findById(saveOrderClient.getIdOrderClient()).isPresent()) {
+			return ResponseEntity.ok(orderClientNew);
+		}else 
+			return ResponseEntity.noContent().build();
+	}
+	/**
+	 * crear platos
+	 * @param plateList
+	 * @return
+	 */
+
+	public ResponseEntity<Plate> createPlate(List<Plate> plateList) {
+
+		Plate plateNew = new Plate();
+		Plate savePlate = null;
+		for (Plate plate : plateList) {
+			plateNew.setIdPlate(plate.getIdPlate());
+			plateNew.setNamePlate(plate.getNamePlate());
+			plateNew.setTypePlate(plate.getTypePlate());
+			plateNew.setPrice(plate.getPrice());
+
+			savePlate = plateDAO.save(plateNew);
+		}
+		if(plateDAO.findById(savePlate.getIdPlate()).isPresent()) {
+			return ResponseEntity.ok(plateNew);
+		}else 
+			return ResponseEntity.noContent().build();
+	}
+
+	/**
+	 * traer lista de ordenes
+	 * @param plateList
+	 * @return
+	 */
+
+	public ResponseEntity<List<OrderClient>> getAllOrdersClient() {
+		List<OrderClient> orderClientList = orderClientDAO.findAll();
+		orderClientList.size();
+		System.out.println(totalBill(orderClientList));
+		return ResponseEntity.ok(orderClientList);
+
+	}
+
+	public ResponseEntity<List<Bill>> getAllBills() {
+		List<Bill> billList = billDAO.findAll();
+		billList.size();
+			System.out.println("Yo me imprimo:"+totalRestaurantIncome(billList));;
+		//		System.out.println(totalRestaurantIncome(billList));
+		return ResponseEntity.ok(billList);
+
+	}
+
+	/**
+	 * Este metodo totaliza la factura
+	 */
+
+	public double totalBill(List<OrderClient> clientList) {
+		double total = 0;
+		for (int i = 0; i < clientList.size(); i++) {
+			for (Plate plate : clientList.get(i).getPlateList()) {
+				total += plate.getPrice();
+			}
+		}
+		return total;
+
+	}
+
+	/**
+	 * Este metodo calcula el total de ingresos del restaurante por dia
+	 */
+	public Map<LocalDate, Double> totalRestaurantIncome(List<Bill> listBills) {
+		double total = 0;
+		LocalDate localDate = null;
+		Map<LocalDate, Double> mapBillIncome = new HashMap<LocalDate, Double>();
+		for (int i = 0; i < listBills.size(); i++) {
+			localDate = listBills.get(i).getDate();
+			if (listBills.get(i).getDate().equals(localDate)) {
+				mapBillIncome.clear();
+				total += listBills.get(i).getTotal();
+				System.out.println("-->"+ total);
+				System.out.println("Fecha:"+localDate);
+				if (!mapBillIncome.containsKey(localDate)) {
+					mapBillIncome.put(localDate, total);
+				}else {
+					mapBillIncome.remove(localDate);
+					mapBillIncome.put(localDate, total);
+				}
+			}else {
+				total = 0;
+			}
+		}
+		return mapBillIncome;
+	}
+
+
+}

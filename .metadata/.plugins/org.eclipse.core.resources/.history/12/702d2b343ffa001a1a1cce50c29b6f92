@@ -1,0 +1,9 @@
+package com.restaurant.payBox.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.restaurant.payBox.entity.ATM;
+
+public interface ATMDAO extends JpaRepository<ATM, Long> {
+
+}

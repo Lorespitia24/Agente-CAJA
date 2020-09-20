@@ -1,0 +1,101 @@
+package com.restaurant.payBox.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.ManyToAny;
+
+/**
+*
+* @author Juliana Barrera, Lorena Espitia, Felipe García, Lina Sanabria
+*/
+
+@Entity
+@Table(name = "Plate")
+public class Plate {
+	
+	@Id
+	@Column(name = "idPlateCalificate")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idPlateCalificate; //ID del platoCalificado
+	
+	@Column(name = "idPlate")
+	private Integer idPlate;
+	
+	@Column(name = "typePlate")
+	@Enumerated(value = EnumType.STRING)
+	private TypePlate typePlate; //tipo de plato
+	
+	@Column(name = "namePlate")
+	private String namePlate;
+	
+	@Column(name = "price")
+	private Double price; //precio del plato
+	
+	@Column(name = "qualificationPlate")
+	private Integer qualificationPlate;
+
+	public Plate() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Plate(Integer idPlate, TypePlate typePlate, Double price) {
+		super();
+		this.idPlate = idPlate;
+		this.typePlate = typePlate;
+		this.price = price;
+		this.qualificationPlate = 0;
+	}
+
+	public Integer getIdPlate() {
+		return idPlate;
+	}
+
+	public void setIdPlate(Integer idPlate) {
+		this.idPlate = idPlate;
+	}
+
+	public TypePlate getTypePlate() {
+		return typePlate;
+	}
+
+	public void setTypePlate(TypePlate typePlate) {
+		this.typePlate = typePlate;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public String getNamePlate() {
+		return namePlate;
+	}
+
+	public void setNamePlate(String namePlate) {
+		this.namePlate = namePlate;
+	}
+
+	public Integer getQualificationPlate() {
+		return qualificationPlate;
+	}
+
+	public void setQualificationPlate(Integer qualificationPlate) {
+		this.qualificationPlate = qualificationPlate;
+	}
+	
+
+}

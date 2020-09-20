@@ -1,0 +1,133 @@
+package com.restaurant.payBox.REST;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.info.ProjectInfoProperties.Build;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.restaurant.payBox.dao.ATM_DAO;
+import com.restaurant.payBox.dao.BillDAO;
+import com.restaurant.payBox.dao.OrderClientDAO;
+import com.restaurant.payBox.dao.PlateDAO;
+import com.restaurant.payBox.entity.ATM;
+import com.restaurant.payBox.entity.Bill;
+import com.restaurant.payBox.entity.Client;
+import com.restaurant.payBox.entity.OrderClient;
+import com.restaurant.payBox.entity.Plate;
+import com.restaurant.payBox.entity.TypeBill;
+import com.restaurant.payBox.entity.TypePayment;
+import com.restaurant.payBox.entity.TypePlate;
+import com.restaurant.payBox.entity.Waiter;
+import com.restaurant.payBox.entity.WorkingDay;
+
+@RestController
+@RequestMapping("payBox")
+public class PayBoxREST {
+	
+	@Autowired
+	private ATM_DAO atmDAO;
+	@Autowired
+	private BillDAO billDAO;
+	@Autowired
+	private OrderClientDAO orderClientDAO;
+	@Autowired
+	private PlateDAO plateDAO;
+	
+	/**
+	 * Este metodo me crea el cajero del restaurante con su jornada de trabajo
+	 * @return
+	 */
+	@GetMapping
+	public ResponseEntity<ATM> createATM() {
+		ATM atm = new ATM();
+		atm.setIdAtm(1);
+		atm.setOccupied(false);
+		atm.setWorkingDay(new WorkingDay(1,28800, 600,7200));
+		atmDAO.save(atm);
+		return ResponseEntity.ok(atm);	
+	}
+	
+	
+	@RequestMapping(value = "/getOrders", method = RequestMethod.GET)
+	public ResponseEntity<Bill> createOrdenerClient() {
+//		List<OrderClient> orderList = new ArrayList<>();
+//		Bill bill = new Bill(TypeBill.AMERICAN_PAYMENT, TypePayment.CARD_PAYMENT, true, 12.0);
+////		billDAO.save(bill);
+//		OrderClient orderClient = new OrderClient();
+////		
+//		orderClient.setIdOrderClient(1);
+//		orderClient.setTypeBill(TypeBill.AMERICAN_PAYMENT);
+//		orderClient.setQualificationPlate(2);
+//		orderClient.setQualificationWaiter(1);
+//		orderClient.setWaiter(new Waiter(1, 2, 2.0));
+//		orderClient.setTypePayment(TypePayment.CARD_PAYMENT);
+//		orderClientDAO.save(orderClient);
+//		orderList.add(orderClient);
+//		bill.setOrderClientList(orderList);
+//		System.out.println(orderClient.toString());
+//		billDAO.save(bill);
+		List<Plate> plates = new ArrayList<>();
+		Plate plate1 = new Plate();
+		plate1.setIdPlate(4);
+		plate1.setPrice(12.0);
+		plate1.setTypePlate(TypePlate.DESSERT);
+		plateDAO.save(plate1);
+		plates.add(plate1);
+//		
+//		bill.addOrderClient(orderClient);
+		return ResponseEntity.ok(bill);
+	}
+
+	@RequestMapping(value = "/getOrders1", method = RequestMethod.POST)
+	public ResponseEntity<OrderClient> createListOrdenerClient(@RequestBody OrderClient orderClient) {
+		Bill bill = new Bill(TypeBill.AMERICAN_PAYMENT, TypePayment.CARD_PAYMENT, true, 12.0);
+		billDAO.save(bill);
+	
+		OrderClient orderClientNew = new OrderClient(orderClient.getIdOrderClient(),
+				orderClient.getTypeBill(), 
+				orderClient.getQualificationPlate(), 
+				orderClient.getQualificationWaiter(), 
+				orderClient.getWaiter(), 
+				orderClient.getTypePayment());
+		
+		orderClientDAO.save(orderClientNew);
+		for (int i = 0; i < orderClient.getPlateList().size(); i++) {
+			plateDAO.save(new Plate(orderClient.getPlateList().get(i).getIdPlate(), 
+					orderClient.getPlateList().get(i).getTypePlate(), 
+					orderClient.getPlateList().get(i).getPrice(), 
+					orderClientNew));
+		}
+		return ResponseEntity.ok(orderClient);
+	}
+	
+	@RequestMapping(value = "/getOrdersAll", method = RequestMethod.GET)
+	public ResponseEntity<List<OrderClient>> getAllOrdersClient() {
+		List<OrderClient> orderClientList = billDAO.getOne(12).getOrderClientList();
+		orderClientList.size();
+		return ResponseEntity.ok(orderClientList);
+			
+	}
+	
+	@RequestMapping(value = "/getOrdersAll2", method = RequestMethod.GET)
+	public ResponseEntity<Bill> getAllOrders() {
+		Optional<Bill> orderClients = billDAO.findById(1);
+		if (orderClients.isPresent()) {
+			return ResponseEntity.ok(orderClients.get());
+			
+		}else {
+			return ResponseEntity.noContent().build();
+		}
+	}
+
+}

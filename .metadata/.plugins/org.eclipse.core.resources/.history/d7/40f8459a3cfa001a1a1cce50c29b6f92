@@ -1,0 +1,83 @@
+package com.restaurant.payBox.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.ManyToAny;
+
+/**
+ *
+ * @author Juliana Barrera, Lorena Espitia, Felipe García, Lina Sanabria
+ */
+@Entity
+@Table(name = "WorkingDay")
+public class WorkingDay {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	@Column(name = "work", nullable = false, length = 30)
+	private Integer work;
+	
+	@Column(name = "wait", nullable = false, length = 30)
+	private Integer wait;
+	
+	@Column(name = "frequencyWait", nullable = false, length = 30)
+	private Integer frequencyWait;
+
+	@OneToOne
+	private ATM atm;
+	
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Integer getWork() {
+		return work;
+	}
+
+	public void setWork(Integer work) {
+		this.work = work;
+	}
+
+	public Integer getWait() {
+		return wait;
+	}
+
+	public void setWait(Integer wait) {
+		this.wait = wait;
+	}
+
+	public Integer getFrequencyWait() {
+		return frequencyWait;
+	}
+
+	public void setFrequencyWait(Integer frequencyWait) {
+		this.frequencyWait = frequencyWait;
+	}
+
+	public ATM getAtm() {
+		return atm;
+	}
+
+	public void setAtm(ATM atm) {
+		this.atm = atm;
+	}
+	
+	
+
+	
+}

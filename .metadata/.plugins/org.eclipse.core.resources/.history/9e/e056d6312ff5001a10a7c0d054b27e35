@@ -1,0 +1,32 @@
+package com.restaurant.payBox.REST;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.restaurant.payBox.dao.ATMDAO;
+import com.restaurant.payBox.entity.ATM;
+
+@RestController
+@RequestMapping("/payBox")
+public class PayBoxREST {
+	
+	@Autowired
+	private ATMDAO atmDAO;
+	
+	@GetMapping
+	public ResponseEntity<List<ATM>> getATM(){
+		List<ATM> atmList = atmDAO.findAll();
+//		return ResponseEntity.ok(atm);
+		return atmList;
+	}
+
+//	@GetMapping
+//	public String metodo() {
+//		return "Hola :)";
+//	}
+}

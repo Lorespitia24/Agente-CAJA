@@ -1,0 +1,9 @@
+package model;
+
+/**
+ *
+ * @author Juliana Barrera, Lorena Espitia, Felipe García, Lina Sanabria
+ */
+public enum TypePayment {
+    CASH_PAYMENT, CARD_PAYMENT
+}

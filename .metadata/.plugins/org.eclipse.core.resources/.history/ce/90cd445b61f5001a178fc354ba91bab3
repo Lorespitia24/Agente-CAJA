@@ -1,0 +1,65 @@
+package co.edu.uptc.service;
+
+import static java.util.Objects.nonNull;
+
+import java.util.List;
+
+import static java.util.Objects.isNull;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import co.edu.uptc.data.entities.Asignatura;
+import co.edu.uptc.repositories.AsignaturaRepository;
+
+@Service("asignaturaService")
+public class AsignaturaService {
+
+	@Autowired
+	private AsignaturaRepository asignaturaRepository;
+
+	public Long crearAsignatura(Asignatura asignatura) {
+		Long idA = existeA(asignatura.getNombre());
+		if (isNull(idA)) {
+			asignatura = asignaturaRepository.save(asignatura);
+			return asignatura.getId();
+		}
+		return idA;
+	}
+
+	public Long existeA(String nombre) {
+		List<Asignatura> listA= asignaturaRepository.findByNombre(nombre);
+		return nonNull(listA) && !listA.isEmpty() ? listA.iterator().next().getId() : null;
+	}
+
+
+	public List<Asignatura> obtenerAPorNombre(String name){
+		return asignaturaRepository.findByNombre(name);
+	}
+
+	public List<Asignatura> obtenerAPorID(long id){
+		return asignaturaRepository.findByid(id);
+	}
+
+	public Page<Asignatura> findAll(Pageable pageable){
+		return asignaturaRepository.findAll(pageable);
+	}
+
+	public void borrarId(long id) {
+		asignaturaRepository.deleteById(id);
+	}
+
+	public void updateA(Asignatura a , long id) {
+		if (asignaturaRepository.findById(id).isPresent()){
+			Asignatura aux  = asignaturaRepository.findById(id).get();
+			aux.setNombre(a.getNombre());
+			aux.setDescripcion(a.getDescripcion());
+			aux.setSemestre(a.getSemestre());
+			aux.setCreditos(a.getCreditos());
+			asignaturaRepository.save(aux);
+	}
+
+}
+}

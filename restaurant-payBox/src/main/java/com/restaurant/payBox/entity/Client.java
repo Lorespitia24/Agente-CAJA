@@ -1,0 +1,36 @@
+package com.restaurant.payBox.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+/**
+*
+* @author Juliana Barrera, Lorena Espitia, Felipe García, Lina Sanabria
+*/
+
+@Entity
+@Table(name = "Client")
+public class Client {
+
+	@Id
+	@Column(name = "idClient")
+	private Integer idClient;
+
+	
+	
+	public Client(Integer idClient) {
+		this.idClient = idClient;
+	}
+
+	public Integer getIdClient() {
+		return idClient;
+	}
+
+	public void setIdClient(Integer idClient) {
+		this.idClient = idClient;
+	}
+	
+	
+}

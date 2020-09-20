@@ -1,0 +1,27 @@
+package com.restaurant.payBox.REST;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.restaurant.payBox.entity.ATM;
+
+@RestController
+@RequestMapping("/payBox")
+public class PayBoxREST {
+	
+	@GetMapping
+	public ResponseEntity<ATM> getATM(){
+		ATM atm = new ATM();
+		atm.setIdAtm(0);
+		atm.setOccupied(false);
+		atm.setWorkingDay(null);
+		return ResponseEntity.ok(atm);
+	}
+
+	@GetMapping
+	public String metodo() {
+		return "Hola :)";
+	}
+}

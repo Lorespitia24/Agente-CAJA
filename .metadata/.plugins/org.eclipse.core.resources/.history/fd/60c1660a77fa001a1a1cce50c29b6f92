@@ -1,0 +1,37 @@
+package com.restaurant.payBox.service;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.restaurant.payBox.dao.OrderClientDAO;
+import com.restaurant.payBox.entity.Client;
+import com.restaurant.payBox.entity.OrderClient;
+import com.restaurant.payBox.entity.Waiter;
+
+@Service
+public class OrderClientService {
+	
+	private OrderClientDAO orderClientDAO;
+	public OrderClientService(OrderClientDAO orderClientDAO) {
+		this.orderClientDAO = orderClientDAO;
+	}	
+	
+	public ResponseEntity<OrderClient> createPlate(OrderClient orderClient) {
+		OrderClient orderClientNew = new OrderClient();
+		orderClientNew.setIdOrderClient(orderClient.getIdOrderClient());
+		orderClientNew.setTypeBill(orderClient.getTypeBill());
+		orderClientNew.setTypePayment(orderClient.getTypePayment());
+		orderClientNew.setQualificationPlate(orderClient.getQualificationPlate());
+		orderClientNew.setQualificationWaiter(orderClient.getQualificationWaiter());
+		orderClientNew.setWaiter(new Waiter(orderClient.getWaiter().getId_waiter(),orderClient.getWaiter().getScoreWaiter(),orderClient.getWaiter().getTip()));
+		orderClientNew.setClient(new Client(orderClient.getClient().getIdClient()));
+		
+		OrderClient savePlate = orderClientDAO.save(orderClientNew);
+		if(orderClientDAO.findById(savePlate.getIdPlate()).isPresent()) {
+			return ResponseEntity.ok(orderClientNew);
+		}else 
+			return ResponseEntity.noContent().build();
+	}
+
+
+}

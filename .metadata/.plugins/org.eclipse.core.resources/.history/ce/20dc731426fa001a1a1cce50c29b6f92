@@ -1,0 +1,33 @@
+package com.restaurant.payBox.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+/**
+*
+* @author Juliana Barrera, Lorena Espitia, Felipe García, Lina Sanabria
+*/
+
+@Entity
+@Table(name = "Plate")
+public class Plate {
+	
+	@Id
+	@Column(name = "idPlate")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idPlate; //ID del plato
+	
+	@Column(name = "typePlate", nullable = false)
+	private TypePlate typePlate; //tipo de plato
+	
+	@Column(name = "price", nullable = false)
+	private Double price; //precio del plato
+	
+	
+	
+
+}

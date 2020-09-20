@@ -1,0 +1,126 @@
+package com.restaurant.payBox.entity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.ManyToAny;
+
+/**
+*
+* @author Juliana Barrera, Lorena Espitia, Felipe García, Lina Sanabria
+*/
+
+@Entity
+@Table(name = "OrderClient")
+public class OrderClient {
+	
+	@Id
+	@Column(name = "idOrderClient")
+    private Integer idOrderClient; //ID de la orden
+	
+	@Column(name = "typeBill")
+    private TypeBill typeBill; //tipo de pago
+	
+	@OneToMany(targetEntity = Plate.class)
+//	@JoinColumn(name = "plateID", referencedColumnName = "idPlate")
+	private List<Plate> plateList ; //lista de platos del cliente
+	
+	@OneToOne(cascade = {CascadeType.ALL})
+	@JoinColumn(name = "id_waiter")
+	private Waiter waiter;//mesero que que atendio
+	
+	@Column(name = "typePayment")
+	@Enumerated(value = EnumType.STRING)
+	private TypePayment typePayment; // tipo de pago 
+	
+	@OneToOne(cascade = {CascadeType.ALL})
+	@JoinColumn(name = "idClient")
+	private Client client; //cliente
+
+	
+	
+	public OrderClient() {
+		this.plateList = new ArrayList<>();
+	}
+
+	public OrderClient(Integer idOrderClient, TypeBill typeBill,
+			 Waiter waiter, TypePayment typePayment) {
+		this.idOrderClient = idOrderClient;
+		this.typeBill = typeBill;
+		this.plateList = new ArrayList<>();
+		this.waiter = waiter;
+		this.typePayment = typePayment;
+		this.client = client;
+	}
+
+	public Integer getIdOrderClient() {
+		return idOrderClient;
+	}
+
+	public void setIdOrderClient(Integer idOrder) {
+		this.idOrderClient = idOrder;
+	}
+
+	public TypeBill getTypeBill() {
+		return typeBill;
+	}
+
+	public void setTypeBill(TypeBill typeBill) {
+		this.typeBill = typeBill;
+	}
+
+	public Waiter getWaiter() {
+		return waiter;
+	}
+
+	public void setWaiter(Waiter waiter) {
+		this.waiter = waiter;
+	}
+
+	public TypePayment getTypePayment() {
+		return typePayment;
+	}
+
+	public void setTypePayment(TypePayment typePayment) {
+		this.typePayment = typePayment;
+	}
+
+	public List<Plate> getPlateList() {
+		return plateList;
+	}
+
+	public void setPlateList(List<Plate> plateList) {
+		this.plateList = plateList;
+	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	@Override
+	public String toString() {
+		return "OrderClient [idOrderClient=" + idOrderClient + ", typeBill=" + typeBill + ", plateList=" + plateList
+				+ ", waiter=" + waiter + ", typePayment=" + typePayment  + ", client=" + client + "]";
+	}
+
+	
+}

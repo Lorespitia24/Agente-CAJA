@@ -1,0 +1,39 @@
+package com.restaurant.payBox.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+/**
+*
+* @author Juliana Barrera, Lorena Espitia, Felipe García, Lina Sanabria
+*/
+
+@Entity
+@Table(name = "ATM")
+
+public class Bill {
+	
+	@Id
+	@Column(name = "idBill")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idBill; //ID de la factura
+	
+	@Column(name = "typeBill")
+    private TypeBill typeBill; //tipo de factura
+	
+	@Column(name = "typePayment")
+    private TypePayment typePayment; //tipo de pago de la factura
+	
+	@Column(name = "delivered")
+    private boolean delivered; //entregada la factura
+	
+	@Column(name = "total")
+    private Double total;
+
+	//    private Order order;
+
+	}

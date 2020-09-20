@@ -1,0 +1,56 @@
+package com.restaurant.payBox.entity;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+/**
+ *
+ * @author Juliana Barrera, Lorena Espitia, Felipe García, Lina Sanabria
+ */
+
+@Entity
+@Table(name = "ATM")
+public class ATM {
+
+	@Id
+	@Column(name = "id_ATM")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer idAtm; //ID del cajero
+	
+	@Column(name = "occupied")
+	private boolean occupied; //está ocupado el cajero
+	
+	@OneToOne(mappedBy = "atm", cascade = CascadeType.ALL)
+	private WorkingDay workingDay; //jornada de trabajo del cajero
+	
+	
+	public Integer getIdAtm() {
+		return idAtm;
+	}
+	public void setIdAtm(Integer idAtm) {
+		this.idAtm = idAtm;
+	}
+	public boolean isOccupied() {
+		return occupied;
+	}
+	public void setOccupied(boolean occupied) {
+		this.occupied = occupied;
+	}
+	public WorkingDay getWorkingDay() {
+		return workingDay;
+	}
+	public void setWorkingDay(WorkingDay workingDay) {
+		this.workingDay = workingDay;
+	}
+
+	
+	
+}

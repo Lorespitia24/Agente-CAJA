@@ -1,0 +1,46 @@
+package co.edu.uptc.service;
+
+import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
+
+import java.time.ZonedDateTime;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import co.edu.uptc.aspect.UptcTime;
+import co.edu.uptc.data.entities.Asignatura;
+import co.edu.uptc.data.entities.Calificacion;
+import co.edu.uptc.data.entities.Estudiante;
+import co.edu.uptc.data.entities.TipoDocumentoEnum;
+import co.edu.uptc.repositories.CalificacionRepository;
+import co.edu.uptc.repositories.EstudianteRepository;
+
+@Service("calificacionService")
+public class CalificacionService {
+
+	@Autowired
+	private CalificacionRepository calificacionRepository;
+	
+
+	public Long crearCalificacion(Calificacion calificacion) {
+		Long idCalificacion = existeCalificacion(calificacion.getDefinitiva(), calificacion.getEstudiante().getId(), calificacion.getAsignatura().getId());
+		if (isNull(idCalificacion)) {
+			calificacion = calificacionRepository.save(calificacion);
+			return calificacion.getId();
+		}
+		return idCalificacion;
+	}
+
+	public Long existeCalificacion(double definitiva, long estudiante, long asignatura) {
+		List<Calificacion> listCalificacion= calificacionRepository.findbycalificacionEstudiante(definitiva, estudiante, asignatura);
+		return nonNull(listCalificacion) && !listCalificacion.isEmpty() ? listCalificacion.iterator().next().getId() : null;
+	}
+	
+	@UptcTime(value = "consultarTodos")
+	public List<Calificacion> consultarTodos(){
+		return calificacionRepository.findAll();
+	}
+	
+}

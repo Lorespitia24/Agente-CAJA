@@ -1,0 +1,31 @@
+package co.edu.uptc.rs;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import co.edu.uptc.data.entities.Calificacion;
+import co.edu.uptc.data.entities.Estudiante;
+import co.edu.uptc.service.CalificacionService;
+import co.edu.uptc.service.EstudianteService;
+
+@RestController
+@RequestMapping("/calificacion")
+public class CalificacionRS {
+
+	@Autowired
+	private CalificacionService calificacionService;
+
+	@CrossOrigin
+	@PreAuthorize("hasAuthority('ADMINISTRADOR')")
+	@PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Long crearCalificacion(@RequestBody Calificacion calificacion) {
+		return calificacionService.crearCalificacion(calificacion);
+	}
+}

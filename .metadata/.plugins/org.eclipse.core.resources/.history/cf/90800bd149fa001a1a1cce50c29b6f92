@@ -1,0 +1,77 @@
+package com.restaurant.payBox.entity;
+
+import java.util.ArrayList;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+/**
+*
+* @author Juliana Barrera, Lorena Espitia, Felipe García, Lina Sanabria
+*/
+
+@Entity
+@Table(name = "Waiter")
+
+public class Waiter{
+
+	@Id
+	@Column(name = "id_waiter", nullable = false)
+    private Integer id_waiter; //ID mesero
+	
+	@Column(name = "scoreWaiter")
+    private Integer scoreWaiter; //calificación mesero
+	
+	@Column(name = "tip")
+    private Double tip; //propina mesero
+	
+//	@OneToOne(mappedBy = "orderClient")
+//	private OrderClient orderClient;
+
+	public Integer getIdWaiter() {
+		return id_waiter;
+	}
+
+	public void setIdWaiter(Integer idWaiter) {
+		this.id_waiter = idWaiter;
+	}
+
+	public Integer getScoreWaiter() {
+		return scoreWaiter;
+	}
+
+	public void setScoreWaiter(Integer scoreWaiter) {
+		this.scoreWaiter = scoreWaiter;
+	}
+
+	public Double getTip() {
+		return tip;
+	}
+
+	public void setTip(Double tip) {
+		this.tip = tip;
+	}
+
+	public Integer getId_waiter() {
+		return id_waiter;
+	}
+
+	public void setId_waiter(Integer id_waiter) {
+		this.id_waiter = id_waiter;
+	}
+
+//	public OrderClient getOrderClient() {
+//		return orderClient;
+//	}
+//
+//	public void setOrderClient(OrderClient orderClient) {
+//		this.orderClient = orderClient;
+//	}
+
+	
+   }

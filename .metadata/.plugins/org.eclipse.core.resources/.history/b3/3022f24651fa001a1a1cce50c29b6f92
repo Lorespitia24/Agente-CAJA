@@ -1,0 +1,117 @@
+package com.restaurant.payBox.entity;
+
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+/**
+*
+* @author Juliana Barrera, Lorena Espitia, Felipe García, Lina Sanabria
+*/
+
+@Entity
+@Table(name = "Bill")
+
+public class Bill {
+	
+	@Id
+	@Column(name = "idBill")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idBill; //ID de la factura
+	
+	@Column(name = "typeBill")
+    private TypeBill typeBill; //tipo de factura
+	
+	@Column(name = "typePayment")
+	@Enumerated(value = EnumType.STRING)
+    private TypePayment typePayment; //tipo de pago de la factura
+	
+	@Column(name = "delivered")
+    private boolean delivered; //entregada la factura
+	
+	@Column(name = "total")
+    private Double total;
+	
+	//ordenes
+	@OneToMany(mappedBy = "bill", cascade = CascadeType.ALL )
+	private List<OrderClient> orderClientList;
+
+	
+	
+	public Bill() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Bill(Integer idBill, TypeBill typeBill, TypePayment typePayment, boolean delivered, Double total,
+			List<OrderClient> orderClientList) {
+		super();
+		this.idBill = idBill;
+		this.typeBill = typeBill;
+		this.typePayment = typePayment;
+		this.delivered = delivered;
+		this.total = total;
+		this.orderClientList = orderClientList;
+	}
+
+	public Integer getIdBill() {
+		return idBill;
+	}
+
+	public void setIdBill(Integer idBill) {
+		this.idBill = idBill;
+	}
+
+	public TypeBill getTypeBill() {
+		return typeBill;
+	}
+
+	public void setTypeBill(TypeBill typeBill) {
+		this.typeBill = typeBill;
+	}
+
+	public TypePayment getTypePayment() {
+		return typePayment;
+	}
+
+	public void setTypePayment(TypePayment typePayment) {
+		this.typePayment = typePayment;
+	}
+
+	public boolean isDelivered() {
+		return delivered;
+	}
+
+	public void setDelivered(boolean delivered) {
+		this.delivered = delivered;
+	}
+
+	public Double getTotal() {
+		return total;
+	}
+
+	public void setTotal(Double total) {
+		this.total = total;
+	}
+
+	public List<OrderClient> getOrderClientList() {
+		return orderClientList;
+	}
+
+	public void setOrderClientList(List<OrderClient> orderClientList) {
+		this.orderClientList = orderClientList;
+	}
+
+	
+	
+
+	}

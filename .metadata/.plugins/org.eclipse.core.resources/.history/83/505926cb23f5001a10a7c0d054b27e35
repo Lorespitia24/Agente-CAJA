@@ -1,0 +1,36 @@
+package com.restaurant.payBox.entity;
+
+/**
+ *
+ * @author Juliana Barrera, Lorena Espitia, Felipe García, Lina Sanabria
+ */
+
+public class ATM {
+
+	private int idAtm; //ID del cajero
+	private boolean occupied; //está ocupado el cajero
+	private WorkingDay workingDay; //jornada de trabajo del cajero
+	
+	
+	public int getIdAtm() {
+		return idAtm;
+	}
+	public void setIdAtm(int idAtm) {
+		this.idAtm = idAtm;
+	}
+	public boolean isOccupied() {
+		return occupied;
+	}
+	public void setOccupied(boolean occupied) {
+		this.occupied = occupied;
+	}
+	public WorkingDay getWorkingDay() {
+		return workingDay;
+	}
+	public void setWorkingDay(WorkingDay workingDay) {
+		this.workingDay = workingDay;
+	}
+
+	
+	
+}

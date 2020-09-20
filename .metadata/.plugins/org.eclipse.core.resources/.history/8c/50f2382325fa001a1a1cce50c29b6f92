@@ -1,0 +1,35 @@
+package com.restaurant.payBox.entity;
+
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+/**
+*
+* @author Juliana Barrera, Lorena Espitia, Felipe García, Lina Sanabria
+*/
+
+@Entity
+@Table(name = "Order")
+public class Order {
+	
+	@Id
+	@Column(name = "idOrder")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idOrder; //ID de la factura
+	
+	@Column(name = "typeBill", nullable = false)
+    private TypeBill typeBill; //tipo de factura
+	
+	private List<Plate> plates;
+	private Integer qualificationPlate;
+	private Integer qualificationWaiter;
+	private Waiter waiter;
+	private TypePayment typePayment;
+
+}

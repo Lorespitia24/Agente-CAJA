@@ -1,0 +1,9 @@
+package com.restaurant.payBox.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.restaurant.payBox.entity.Plate;
+
+public interface PlateDAO extends JpaRepository<Plate, Integer>{
+
+}

@@ -1,0 +1,23 @@
+package co.edu.uptc.repositories;
+
+import java.time.ZonedDateTime;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import co.edu.uptc.data.entities.Asignatura;
+import co.edu.uptc.data.entities.Calificacion;
+import co.edu.uptc.data.entities.Estudiante;
+
+
+@Repository(value = "calificacionRepository")
+@Transactional
+public interface CalificacionRepository extends JpaRepository<Calificacion, Long>{
+	
+	public List<Calificacion> findbycalificacionEstudiante(double definitiva, long estudiante_id, long asignatura_id);
+	
+	public List<Calificacion> findByid(long id);
+}

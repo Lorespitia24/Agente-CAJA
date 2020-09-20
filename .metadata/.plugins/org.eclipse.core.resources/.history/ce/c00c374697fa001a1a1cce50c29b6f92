@@ -1,0 +1,125 @@
+package com.restaurant.payBox.service;
+
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.restaurant.payBox.dao.BillDAO;
+import com.restaurant.payBox.dao.OrderClientDAO;
+import com.restaurant.payBox.dao.PlateDAO;
+import com.restaurant.payBox.entity.Bill;
+import com.restaurant.payBox.entity.OrderClient;
+import com.restaurant.payBox.entity.Plate;
+import com.restaurant.payBox.entity.Waiter;
+
+/**
+ *
+ * @author Juliana Barrera, Lorena Espitia, Felipe García, Lina Sanabria
+ */
+@Service
+public class BillService {
+
+	private OrderClientDAO orderClientDAO;
+	private PlateDAO plateDAO;
+	private BillDAO billDAO;
+	public BillService(OrderClientDAO orderClientDAO, PlateDAO plateDAO, BillDAO billDAO) {
+		this.plateDAO = plateDAO;
+		this.orderClientDAO = orderClientDAO;
+		this.billDAO = billDAO;
+	}	
+	
+	public ResponseEntity<Bill> createBill(List<OrderClient> orderList) {
+		Bill billNew = new Bill();
+		billNew.setOrderClientList(orderList);
+		billNew.setDelivered(true);//cambiar estado
+		billNew.setTotal(200.2);//llamar al metodo totalizar factura
+		
+		Bill saveBill = billDAO.save(billNew);
+		if(billDAO.findById(saveBill.getIdBill()).isPresent()) {
+			return ResponseEntity.ok(saveBill);
+		}else 
+			return ResponseEntity.noContent().build();
+
+	}
+	/**
+	 * crear ordenes 
+	 * @param plateList
+	 * @return
+	 */
+	public ResponseEntity<OrderClient> createOrder(OrderClient orderClient) {
+		OrderClient orderClientNew = new OrderClient();
+		orderClientNew.setIdOrderClient(orderClient.getIdOrderClient());
+		orderClientNew.setTypeBill(orderClient.getTypeBill());
+		orderClientNew.setTypePayment(orderClient.getTypePayment());
+		orderClientNew.setQualificationPlate(orderClient.getQualificationPlate());
+		orderClientNew.setQualificationWaiter(orderClient.getQualificationWaiter());
+		orderClientNew.setWaiter(new Waiter(orderClient.getWaiter().getId_waiter()));
+//		orderClientNew.setClient(new Client(orderClient.getClient().getIdClient()));
+		orderClientNew.setPlateList(orderClient.getPlateList());
+		createPlate(orderClientNew.getPlateList());
+		OrderClient saveOrderClient = orderClientDAO.save(orderClientNew);
+		if(orderClientDAO.findById(saveOrderClient.getIdOrderClient()).isPresent()) {
+			return ResponseEntity.ok(orderClientNew);
+		}else 
+			return ResponseEntity.noContent().build();
+	}
+/**
+ * crear platos
+ * @param plateList
+ * @return
+ */
+	
+	public ResponseEntity<Plate> createPlate(List<Plate> plateList) {
+		Plate plateNew = new Plate();
+		for (Plate plate : plateList) {
+			plateNew.setIdPlate(plate.getIdPlate());
+			plateNew.setNamePlate(plate.getNamePlate());
+			plateNew.setTypePlate(plate.getTypePlate());
+			plateNew.setPrice(plate.getPrice());
+
+		}
+		Plate savePlate = plateDAO.save(plateNew);
+		if(plateDAO.findById(savePlate.getIdPlate()).isPresent()) {
+			return ResponseEntity.ok(plateNew);
+		}else 
+			return ResponseEntity.noContent().build();
+	}
+	
+	/**
+	 * traer lista de ordenes
+	 * @param plateList
+	 * @return
+	 */
+	
+	public ResponseEntity<List<OrderClient>> getAllOrdersClient() {
+		List<OrderClient> orderClientList = orderClientDAO.findAll();
+		orderClientList.size();
+		return ResponseEntity.ok(orderClientList);
+			
+	}
+	
+	/**
+	 * Este metodo totaliza la factura
+	 */
+	
+	public int totalBill(List<OrderClient> clientList) {
+		int total = 0;
+		for (int i = 0; i < clientList.size(); i++) {
+		for (Plate plate : clientList.get(i).getPlateList()) {
+			total= plate.getPrice();
+		}
+		}
+		return total;
+		
+	}
+	
+	/**
+	 * Este metodo calcula el total de ingresos del restaurante por dia
+	 */
+	public void totalRestaurantIncome() {
+		
+	}
+
+
+}

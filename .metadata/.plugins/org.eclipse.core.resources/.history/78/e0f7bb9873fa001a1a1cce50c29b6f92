@@ -1,0 +1,33 @@
+package com.restaurant.payBox.service;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.restaurant.payBox.dao.PlateDAO;
+import com.restaurant.payBox.entity.Plate;
+
+@Service
+public class PlateService {
+	
+	private PlateDAO plateDAO;
+	public PlateService(PlateDAO plateDAO) {
+		this.plateDAO = plateDAO;
+	}	
+	
+	public ResponseEntity<Plate> createPlate(Plate plate) {
+		Plate plateNew = new Plate();
+		plateNew.setIdPlate(plate.getIdPlate());
+		plateNew.setNamePlate(plate.getNamePlate());
+		plateNew.setTypePlate(plate.getTypePlate());
+		plateNew.setPrice(plate.getPrice());
+		
+		Plate savePlate = plateDAO.save(plateNew);
+		if(plateDAO.findById(savePlate.getIdPlate()).isPresent()) {
+			return ResponseEntity.accepted().body("plato creado");
+		}else {
+			return ResponseEntity.unprocessableEntity().body("plano no creado";)
+		}
+		
+	}
+
+}

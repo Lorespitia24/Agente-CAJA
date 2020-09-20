@@ -1,0 +1,164 @@
+package com.restaurant.payBox.entity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.ManyToAny;
+
+/**
+*
+* @author Juliana Barrera, Lorena Espitia, Felipe García, Lina Sanabria
+*/
+
+@Entity
+@Table(name = "OrderClient")
+public class OrderClient {
+	
+	@Id
+	@Column(name = "idOrderClient")
+    private Integer idOrderClient; //ID de la orden
+	
+	@Column(name = "typeBill")
+    private TypeBill typeBill; //tipo de pago
+	
+	@OneToMany(mappedBy = "orderClient", cascade = CascadeType.ALL )
+	private List<Plate> plateList = new ArrayList<>(); //lista de platos del cliente
+	
+	@Column(name = "qualificationPlate")
+	private Integer qualificationPlate; // calificacion del plato 
+	
+	@Column(name = "qualificationWaiter")
+	private Integer qualificationWaiter;//calificación del mesero
+	
+	@OneToOne(cascade = {CascadeType.ALL})
+	@JoinColumn(name = "id_waiter")
+	private Waiter waiter;//mesero que que atendio
+	
+	@Column(name = "typePayment")
+	@Enumerated(value = EnumType.STRING)
+	private TypePayment typePayment; // tipo de pago 
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idBill")
+	private Bill bill;//factura
+	
+	@OneToOne(cascade = {CascadeType.ALL})
+	@JoinColumn(name = "client")
+	private Client client; //cliente
+
+	
+	
+	public OrderClient() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public OrderClient(Integer idOrderClient, TypeBill typeBill, List<Plate> plateList, Integer qualificationPlate,
+			Integer qualificationWaiter, Waiter waiter, TypePayment typePayment, Bill bill, Client client) {
+		this.idOrderClient = idOrderClient;
+		this.typeBill = typeBill;
+		this.plateList = plateList;
+		this.qualificationPlate = qualificationPlate;
+		this.qualificationWaiter = qualificationWaiter;
+		this.waiter = waiter;
+		this.typePayment = typePayment;
+		this.bill = bill;
+		this.client = client;
+	}
+
+	public Integer getIdOrderClient() {
+		return idOrderClient;
+	}
+
+	public void setIdOrderClient(Integer idOrder) {
+		this.idOrderClient = idOrder;
+	}
+
+	public TypeBill getTypeBill() {
+		return typeBill;
+	}
+
+	public void setTypeBill(TypeBill typeBill) {
+		this.typeBill = typeBill;
+	}
+
+	public List<Plate> getPlates() {
+		return plateList;
+	}
+
+	public void setPlates(List<Plate> plateList) {
+		this.plateList = plateList;
+	}
+
+	public Integer getQualificationPlate() {
+		return qualificationPlate;
+	}
+
+	public void setQualificationPlate(Integer qualificationPlate) {
+		this.qualificationPlate = qualificationPlate;
+	}
+
+	public Integer getQualificationWaiter() {
+		return qualificationWaiter;
+	}
+
+	public void setQualificationWaiter(Integer qualificationWaiter) {
+		this.qualificationWaiter = qualificationWaiter;
+	}
+
+	public Waiter getWaiter() {
+		return waiter;
+	}
+
+	public void setWaiter(Waiter waiter) {
+		this.waiter = waiter;
+	}
+
+	public TypePayment getTypePayment() {
+		return typePayment;
+	}
+
+	public void setTypePayment(TypePayment typePayment) {
+		this.typePayment = typePayment;
+	}
+
+	public List<Plate> getPlateList() {
+		return plateList;
+	}
+
+	public void setPlateList(List<Plate> plateList) {
+		this.plateList = plateList;
+	}
+
+	public Bill getBill() {
+		return bill;
+	}
+
+	public void setBill(Bill bill) {
+		this.bill = bill;
+	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	
+}

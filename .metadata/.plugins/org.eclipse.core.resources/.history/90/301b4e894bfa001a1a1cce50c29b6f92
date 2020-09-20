@@ -1,0 +1,74 @@
+package com.restaurant.payBox.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.ManyToAny;
+
+/**
+*
+* @author Juliana Barrera, Lorena Espitia, Felipe García, Lina Sanabria
+*/
+
+@Entity
+@Table(name = "Plate")
+public class Plate {
+	
+	@Id
+	@Column(name = "idPlate")
+    private Integer idPlate; //ID del plato
+	
+	@Column(name = "typePlate")
+	@Enumerated(value = EnumType.STRING)
+	private TypePlate typePlate; //tipo de plato
+	
+	@Column(name = "price")
+	private Double price; //precio del plato
+	
+	@ManyToOne
+	private OrderClient orderClient;
+
+	public Integer getIdPlate() {
+		return idPlate;
+	}
+
+	public void setIdPlate(Integer idPlate) {
+		this.idPlate = idPlate;
+	}
+
+	public TypePlate getTypePlate() {
+		return typePlate;
+	}
+
+	public void setTypePlate(TypePlate typePlate) {
+		this.typePlate = typePlate;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public OrderClient getOrderClient() {
+		return orderClient;
+	}
+
+	public void setOrderClient(OrderClient orderClient) {
+		this.orderClient = orderClient;
+	}
+	
+	
+	
+
+}

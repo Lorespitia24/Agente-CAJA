@@ -1,0 +1,56 @@
+package com.restaurant.payBox.service;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.restaurant.payBox.dao.OrderClientDAO;
+import com.restaurant.payBox.dao.PlateDAO;
+import com.restaurant.payBox.entity.Client;
+import com.restaurant.payBox.entity.OrderClient;
+import com.restaurant.payBox.entity.Plate;
+import com.restaurant.payBox.entity.Waiter;
+
+@Service
+public class OrderClientService {
+	
+	private OrderClientDAO orderClientDAO;
+	private PlateDAO plateDAO;
+	public OrderClientService(OrderClientDAO orderClientDAO, PlateDAO plateDAO) {
+		this.plateDAO = plateDAO;
+		this.orderClientDAO = orderClientDAO;
+	}	
+	
+	public ResponseEntity<OrderClient> createPlate(OrderClient orderClient) {
+		OrderClient orderClientNew = new OrderClient();
+		orderClientNew.setIdOrderClient(orderClient.getIdOrderClient());
+		orderClientNew.setTypeBill(orderClient.getTypeBill());
+		orderClientNew.setTypePayment(orderClient.getTypePayment());
+		orderClientNew.setQualificationPlate(orderClient.getQualificationPlate());
+		orderClientNew.setQualificationWaiter(orderClient.getQualificationWaiter());
+		orderClientNew.setWaiter(new Waiter(orderClient.getWaiter().getId_waiter(),orderClient.getWaiter().getScoreWaiter(),orderClient.getWaiter().getTip()));
+		orderClientNew.setClient(new Client(orderClient.getClient().getIdClient()));
+		orderClientNew.setPlateList(orderClient.getPlateList());
+		
+		OrderClient saveOrderClient = orderClientDAO.save(orderClientNew);
+		if(orderClientDAO.findById(saveOrderClient.getIdOrderClient()).isPresent()) {
+			return ResponseEntity.ok(orderClientNew);
+		}else 
+			return ResponseEntity.noContent().build();
+	}
+
+	public ResponseEntity<Plate> createPlate(Plate plate) {
+		Plate plateNew = new Plate();
+		plateNew.setIdPlate(plate.getIdPlate());
+		plateNew.setNamePlate(plate.getNamePlate());
+		plateNew.setTypePlate(plate.getTypePlate());
+		plateNew.setPrice(plate.getPrice());
+		
+		Plate savePlate = plateDAO.save(plateNew);
+		if(plateDAO.findById(savePlate.getIdPlate()).isPresent()) {
+			return ResponseEntity.ok(plateNew);
+		}else 
+			return ResponseEntity.noContent().build();
+	}
+
+
+}

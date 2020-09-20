@@ -1,0 +1,35 @@
+package com.restaurant.payBox.entity;
+
+/**
+ *
+ * @author Juliana Barrera, Lorena Espitia, Felipe García, Lina Sanabria
+ */
+
+public class WorkingDay {
+
+	private int work;
+	private int wait;
+	private int frequencyWait;
+	
+	
+	public int getWork() {
+		return work;
+	}
+	public void setWork(int work) {
+		this.work = work;
+	}
+	public int getWait() {
+		return wait;
+	}
+	public void setWait(int wait) {
+		this.wait = wait;
+	}
+	public int getFrequencyWait() {
+		return frequencyWait;
+	}
+	public void setFrequencyWait(int frequencyWait) {
+		this.frequencyWait = frequencyWait;
+	}
+
+	
+}

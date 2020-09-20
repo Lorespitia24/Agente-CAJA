@@ -1,0 +1,84 @@
+package model;
+
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Juliana Barrera, Lorena Espitia, Felipe García, Lina Sanabria
+ */
+public class Waiter extends Thread {
+
+    private int idWaiter; //ID mesero
+    private int scoreWaiter; //calificación mesero
+    private int tip; //propina mesero
+    private boolean occupied; //está ocupado el mesero
+    private WorkingDay workingDay; //jornada de trabajo del mesero
+    private ArrayList<Order> orders;
+
+    public Waiter(int idWaiter, int scoreWaiter, int tip, boolean occupied, WorkingDay workingDay) {
+        this.idWaiter = idWaiter;
+        this.scoreWaiter = scoreWaiter;
+        this.tip = tip;
+        this.occupied = false;
+        this.workingDay = workingDay;
+        this.orders = null;
+    }
+
+    @Override
+    public void run() {
+    }
+
+    public ArrayList<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(ArrayList<Order> orders) {
+        this.orders = orders;
+    }
+
+    
+    public int getIdWaiter() {
+        return idWaiter;
+    }
+
+    public void setIdWaiter(int idWaiter) {
+        this.idWaiter = idWaiter;
+    }
+
+    public int getScoreWaiter() {
+        return scoreWaiter;
+    }
+
+    public void setScoreWaiter(int scoreWaiter) {
+        this.scoreWaiter = scoreWaiter;
+    }
+
+    public int getTip() {
+        return tip;
+    }
+
+    public void setTip(int tip) {
+        this.tip = tip;
+    }
+
+    public boolean isOccupied() {
+        return occupied;
+    }
+
+    public void setOccupied(boolean occupied) {
+        this.occupied = occupied;
+    }
+
+    public WorkingDay getWorkingDay() {
+        return workingDay;
+    }
+
+    public void setWorkingDay(WorkingDay workingDay) {
+        this.workingDay = workingDay;
+    }
+
+    @Override
+    public String toString() {
+        return "Waiter{" + "idWaiter=" + idWaiter + ", scoreWaiter=" + scoreWaiter + ", tip=" + tip + ", occupied=" + occupied + ", workingDay=" + workingDay + '}';
+    }
+}

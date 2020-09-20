@@ -1,0 +1,73 @@
+package com.restaurant.payBox.REST;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.info.ProjectInfoProperties.Build;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.restaurant.payBox.dao.ATM_DAO;
+import com.restaurant.payBox.dao.BillDAO;
+import com.restaurant.payBox.dao.OrderClientDAO;
+import com.restaurant.payBox.dao.PlateDAO;
+import com.restaurant.payBox.entity.ATM;
+import com.restaurant.payBox.entity.Bill;
+import com.restaurant.payBox.entity.Client;
+import com.restaurant.payBox.entity.OrderClient;
+import com.restaurant.payBox.entity.Plate;
+import com.restaurant.payBox.entity.TypeBill;
+import com.restaurant.payBox.entity.TypePayment;
+import com.restaurant.payBox.entity.TypePlate;
+import com.restaurant.payBox.entity.Waiter;
+import com.restaurant.payBox.entity.WorkingDay;
+
+@RestController
+@RequestMapping("payBox")
+public class PayBoxREST {
+	
+	@Autowired
+	private ATM_DAO atmDAO;
+	private BillDAO billDAO;
+	private OrderClientDAO orderClientDAO;
+	private PlateDAO plateDAO;
+	
+	/**
+	 * Este metodo me crea el cajero del restaurante con su jornada de trabajo
+	 * @return
+	 */
+	@GetMapping
+	public ResponseEntity<ATM> createATM() {
+		ATM atm = new ATM();
+		atm.setIdAtm(1);
+		atm.setOccupied(false);
+		atm.setWorkingDay(new WorkingDay(1,28800, 600,7200));
+		atmDAO.save(atm);
+		return ResponseEntity.ok(atm);	
+	}
+	
+	
+	@RequestMapping(value = "/getOrders", method = RequestMethod.GET)
+	public ResponseEntity<OrderClient> createOrdenerClient() {
+		Bill bill = new Bill(1, TypeBill.AMERICAN_PAYMENT, TypePayment.CARD_PAYMENT, true, 12.2);
+		billDAO.save(bill);
+		OrderClient orderClient = new OrderClient(1, TypeBill.PERSON_PAYMENT, 2, 2, new Waiter(1, 0, 0.0), TypePayment.CARD_PAYMENT, bill, new Client(1));
+		Plate plate1 = new Plate(1, TypePlate.DESSERT, 1200.0, orderClient);
+		Plate plate2 = new Plate(2, TypePlate.MAIN_COURSE, 1200.0, orderClient);
+		Plate plate3 = new Plate(3, TypePlate.STARTER_PLATE, 1200.0, orderClient);
+		orderClientDAO.save(orderClient);
+		plateDAO.save(plate1);
+		plateDAO.save(plate2);
+		plateDAO.save(plate3);
+		return ResponseEntity.ok(orderClient);
+	}
+
+}

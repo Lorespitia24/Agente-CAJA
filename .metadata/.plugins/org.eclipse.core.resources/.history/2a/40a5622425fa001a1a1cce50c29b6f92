@@ -1,0 +1,15 @@
+package com.restaurant.payBox.entity;
+
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Juliana Barrera, Lorena Espitia, Felipe García, Lina Sanabria
+ */
+public class Waiter extends Thread {
+
+    private int idWaiter; //ID mesero
+    private int scoreWaiter; //calificación mesero
+    private int tip; //propina mesero
+
+   }

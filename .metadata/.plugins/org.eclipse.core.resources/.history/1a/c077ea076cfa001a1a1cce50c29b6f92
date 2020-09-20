@@ -1,0 +1,9 @@
+package com.restaurant.payBox.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.restaurant.payBox.entity.OrderClient;
+
+public interface OrderClientDAO extends JpaRepository<OrderClient, Integer> {
+
+}

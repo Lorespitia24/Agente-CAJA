@@ -1,0 +1,81 @@
+package com.restaurant.payBox.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+/**
+*
+* @author Juliana Barrera, Lorena Espitia, Felipe García, Lina Sanabria
+*/
+
+@Entity
+@Table(name = "ATM")
+
+public class Bill {
+	
+	@Id
+	@Column(name = "idBill")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idBill; //ID de la factura
+	
+	@Column(name = "typeBill")
+    private TypeBill typeBill; //tipo de factura
+	
+	@Column(name = "typePayment")
+    private TypePayment typePayment; //tipo de pago de la factura
+	
+	@Column(name = "delivered")
+    private boolean delivered; //entregada la factura
+	
+	@Column(name = "total")
+    private double total;
+
+	//    private Order order;
+
+	public Integer getIdBill() {
+		return idBill;
+	}
+
+	public void setIdBill(Integer idBill) {
+		this.idBill = idBill;
+	}
+
+	public TypeBill getTypeBill() {
+		return typeBill;
+	}
+
+	public void setTypeBill(TypeBill typeBill) {
+		this.typeBill = typeBill;
+	}
+
+	public TypePayment getTypePayment() {
+		return typePayment;
+	}
+
+	public void setTypePayment(TypePayment typePayment) {
+		this.typePayment = typePayment;
+	}
+
+	public boolean isDelivered() {
+		return delivered;
+	}
+
+	public void setDelivered(boolean delivered) {
+		this.delivered = delivered;
+	}
+
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
+
+	
+	
+}
