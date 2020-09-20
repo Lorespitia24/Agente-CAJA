@@ -9,7 +9,6 @@ INDEX VERSION 1.131+D:\Lorespitia24\Documentos\Simulación\S4\Caja\.metadata\.plu
 4078958042.index
 1403635527.index
 3720716507.index
-1802149680.index
 150991130.index
 4184238389.index
 2558235944.index

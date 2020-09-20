@@ -34,7 +34,7 @@ import com.restaurant.payBox.service.BillService;
 
 /**
  *
- * @author Juliana Barrera, Lorena Espitia, Felipe García, Nicolás Ramos, Lina Sanabria
+ * @author Juliana Barrera, Lorena Espitia, Felipe García, Lina Sanabria
  */
 
 @RestController

@@ -15,7 +15,7 @@ import org.hibernate.annotations.ManyToAny;
 
 /**
  *
- * @author Juliana Barrera, Lorena Espitia, Felipe García,Nicolás Ramos, Lina Sanabria
+ * @author Juliana Barrera, Lorena Espitia, Felipe García, Lina Sanabria
  */
 @Entity
 @Table(name = "WorkingDay")

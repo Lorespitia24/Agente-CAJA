@@ -20,7 +20,7 @@ import com.restaurant.payBox.entity.Waiter;
 
 /**
  *
- * @author Juliana Barrera, Lorena Espitia, Felipe García, Nicolás Ramos, Lina Sanabria
+ * @author Juliana Barrera, Lorena Espitia, Felipe García, Lina Sanabria
  */
 @Service
 public class BillService {

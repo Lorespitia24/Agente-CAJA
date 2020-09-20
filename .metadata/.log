@@ -10025,3 +10025,15 @@ Java Model Exception: Java Model Status [setIdBill(Integer) [in Bill [in [Workin
 	at java.util.concurrent.ForkJoinWorkerThread.run(Unknown Source)
 !SUBENTRY 1 org.eclipse.jdt.core 4 969 2020-09-20 00:54:05.353
 !MESSAGE setIdBill(Integer) [in Bill [in [Working copy] Bill.java [in com.restaurant.payBox.entity [in src/main/java [in restaurant-payBox]]]]] does not exist
+
+!ENTRY org.eclipse.lsp4e 2 0 2020-09-20 01:24:56.710
+!MESSAGE Javadoc unavailable. Failed to obtain it.
+!STACK 0
+java.lang.InterruptedException
+	at java.util.concurrent.CompletableFuture.reportGet(Unknown Source)
+	at java.util.concurrent.CompletableFuture.get(Unknown Source)
+	at org.eclipse.lsp4e.jdt.LSJavaHoverProvider.getHoverInfo2(LSJavaHoverProvider.java:70)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:130)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:89)
+	at org.eclipse.jface.text.TextViewerHoverManager$1.run(TextViewerHoverManager.java:155)

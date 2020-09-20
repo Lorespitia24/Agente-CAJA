@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Juliana Barrera, Lorena Espitia, Felipe García,Nicolás Ramos, Lina Sanabria
+ * @author Juliana Barrera, Lorena Espitia, Felipe García, Lina Sanabria
  */
 
 @Entity

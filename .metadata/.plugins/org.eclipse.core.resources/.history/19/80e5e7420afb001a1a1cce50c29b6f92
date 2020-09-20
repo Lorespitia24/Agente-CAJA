@@ -7,7 +7,7 @@ import com.restaurant.payBox.entity.OrderClient;
 
 /**
  *
- * @author Juliana Barrera, Lorena Espitia, Felipe García,Nicolás Ramos, Lina Sanabria
+ * @author Juliana Barrera, Lorena Espitia, Felipe García, Lina Sanabria
  */
 @Repository
 public interface OrderClientDAO extends JpaRepository<OrderClient, Long> {
