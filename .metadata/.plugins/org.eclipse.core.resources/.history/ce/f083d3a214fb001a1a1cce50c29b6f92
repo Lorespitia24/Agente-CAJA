@@ -66,8 +66,6 @@ public class BillService {
 		orderClientNew.setTypeBill(orderClient.getTypeBill());
 		orderClientNew.setTypePayment(orderClient.getTypePayment());
 		orderClientNew.setWaiter(new Waiter(orderClient.getWaiter().getWaiter()));
-		orderClientNew.setDate(orderClient.getDate());
-		orderClientNew.setTips(orderClient.isTips());
 		//		orderClientNew.setClient(new Client(orderClient.getClient().getIdClient()));
 		for (Plate plate : orderClient.getPlateList()) {
 			orderClientNew.getPlateList().add(createPlate(plate).getBody());

@@ -73,78 +73,136 @@ public class OrderClient {
 		this.client = client;
 	}
 
+
+
+
+
+
 	public Long getIdOrder() {
 		return idOrder;
 	}
+
+
+
+
+
 
 	public void setIdOrder(Long idOrder) {
 		this.idOrder = idOrder;
 	}
 
+
+
+
+
+
 	public Integer getOrderClient() {
 		return orderClient;
 	}
+
+
+
+
+
 
 	public void setOrderClient(Integer orderClient) {
 		this.orderClient = orderClient;
 	}
 
+
+
+
+
+
 	public TypeBill getTypeBill() {
 		return typeBill;
 	}
+
+
+
+
+
 
 	public void setTypeBill(TypeBill typeBill) {
 		this.typeBill = typeBill;
 	}
 
+
+
+
+
+
 	public List<Plate> getPlateList() {
 		return plateList;
 	}
+
+
+
+
+
 
 	public void setPlateList(List<Plate> plateList) {
 		this.plateList = plateList;
 	}
 
+
+
+
+
+
 	public Waiter getWaiter() {
 		return waiter;
 	}
+
+
+
+
+
 
 	public void setWaiter(Waiter waiter) {
 		this.waiter = waiter;
 	}
 
+
+
+
+
+
 	public TypePayment getTypePayment() {
 		return typePayment;
 	}
+
+
+
+
+
 
 	public void setTypePayment(TypePayment typePayment) {
 		this.typePayment = typePayment;
 	}
 
+
+
+
+
+
 	public Client getClient() {
 		return client;
 	}
+
+
+
+
+
 
 	public void setClient(Client client) {
 		this.client = client;
 	}
 
 
-	public LocalDate getDate() {
-		return date;
-	}
 
-	public void setDate(LocalDate date) {
-		this.date = date;
-	}
 
-	public boolean isTips() {
-		return tips;
-	}
 
-	public void setTips(boolean tips) {
-		this.tips = tips;
-	}
 
 	@Override
 	public String toString() {

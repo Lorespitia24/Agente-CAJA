@@ -68,7 +68,6 @@ public class Bill {
 		this.delivered = delivered;
 		this.total = total;
 		this.orderClientList = new ArrayList<>();
-		this.tips = false;
 	}
 
 	public Long getIdBill() {
@@ -127,14 +126,4 @@ public class Bill {
 		this.date = date;
 	}
 
-	public boolean isTips() {
-		return tips;
-	}
-
-	public void setTips(boolean tips) {
-		this.tips = tips;
-	}
-
-	
-	
 	}

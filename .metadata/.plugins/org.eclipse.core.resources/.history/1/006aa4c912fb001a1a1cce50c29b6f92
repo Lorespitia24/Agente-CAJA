@@ -34,8 +34,6 @@ public class BillService {
 		this.billDAO = billDAO;
 	}	
 
-	
-	
 	public ResponseEntity<Bill> createBill(List<OrderClient> orderList) {
 		Bill billNew = new Bill();
 		for(OrderClient orderClient : orderList ) {
@@ -45,8 +43,7 @@ public class BillService {
 //		billNew.setOrderClientList(orderList);
 		billNew.setDelivered(true);//cambiar estado
 		billNew.setTotal(totalBill(billNew.getOrderClientList()));//llamar al metodo totalizar factura
-		billNew.setDate(orderList.get(0).getDate());
-		billNew.setTips(orderList.get(0).isTips());
+		billNew.setDate(LocalDate.of(2020, 8, 11));
 		Bill saveBill = billDAO.save(billNew);
 		if(billDAO.findById(saveBill.getIdBill()).isPresent()) {
 			return ResponseEntity.ok(saveBill);
@@ -66,8 +63,6 @@ public class BillService {
 		orderClientNew.setTypeBill(orderClient.getTypeBill());
 		orderClientNew.setTypePayment(orderClient.getTypePayment());
 		orderClientNew.setWaiter(new Waiter(orderClient.getWaiter().getWaiter()));
-		orderClientNew.setDate(orderClient.getDate());
-		orderClientNew.setTips(orderClient.isTips());
 		//		orderClientNew.setClient(new Client(orderClient.getClient().getIdClient()));
 		for (Plate plate : orderClient.getPlateList()) {
 			orderClientNew.getPlateList().add(createPlate(plate).getBody());
@@ -117,7 +112,6 @@ public class BillService {
 		List<Bill> billList = billDAO.findAll();
 		billList.size();
 		System.out.println("Yo me imprimo:"+totalRestaurantIncome(billList));
-		setTipToWaiter(billList.get(0));
 		//		System.out.println(totalRestaurantIncome(billList));
 		return ResponseEntity.ok(billList);
 
@@ -164,30 +158,11 @@ public class BillService {
 		}
 		return mapBillIncome;
 	}
-	
-	/**
-	 * MÃ©todo que le asigna la propina al mesero
-	 */
-	public void setTipToWaiter(Bill bill) {
-		if (bill.isTips() == true) {
-			for (OrderClient orderClient: bill.getOrderClientList()) {
-				
-				orderClient.getWaiter().setTip(orderClient.getWaiter().getTip()+calculateTipWaiter(bill.getTotal()));
-				System.out.println(orderClient.getWaiter().getTip() +"----"+orderClient.getWaiter().getTip());
-			}
-		}
-	}
+
 
 	/**
-	 * Este metodo calcula la propina del cajero
+	 * sumar calificación de cada mesero
 	 */
-	public double calculateTipWaiter(double total) {
-		int totalTip = 0;
-		totalTip += ((total *10)/100);
-		return totalTip;
-	}
-
-	
 //	public Map<Object, Double> sumCalificationWaiter(List<Bill> listBills) {
 //		int total = 0;
 //		Waiter waiter = null;

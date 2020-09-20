@@ -4596,3 +4596,78 @@ org.eclipse.core.runtime.CoreException: Could not read maven project
 2020-09-20 00:59:15,704 [Worker-491: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
 2020-09-20 00:59:15,705 [Worker-491: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2020-09-20 00:59:15,706 [Worker-491: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Lorespitia24\Documentos\Simulación\S4\Caja\restaurant-payBox\src\test\resources
+2020-09-20 01:26:12,981 [Worker-494: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 01:26:12,983 [Worker-494: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-09-20 01:26:12,985 [Worker-494: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-09-20 01:26:12,987 [Worker-494: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 01:26:12,987 [Worker-494: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Lorespitia24\Documentos\Simulación\S4\Caja\restaurant-payBox\src\test\resources
+2020-09-20 01:26:43,538 [Worker-496: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 01:26:43,540 [Worker-496: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-09-20 01:26:43,551 [Worker-496: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-09-20 01:26:43,553 [Worker-496: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 01:26:43,553 [Worker-496: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Lorespitia24\Documentos\Simulación\S4\Caja\restaurant-payBox\src\test\resources
+2020-09-20 01:26:48,387 [Worker-502: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 01:26:48,388 [Worker-502: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-09-20 01:26:48,390 [Worker-502: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-09-20 01:26:48,392 [Worker-502: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 01:26:48,392 [Worker-502: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Lorespitia24\Documentos\Simulación\S4\Caja\restaurant-payBox\src\test\resources
+2020-09-20 02:00:51,572 [Worker-494: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 02:00:51,573 [Worker-494: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-09-20 02:00:51,577 [Worker-494: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-09-20 02:00:51,579 [Worker-494: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 02:00:51,579 [Worker-494: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Lorespitia24\Documentos\Simulación\S4\Caja\restaurant-payBox\src\test\resources
+2020-09-20 02:07:40,912 [Worker-496: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 02:07:40,913 [Worker-496: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-09-20 02:07:40,915 [Worker-496: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-09-20 02:07:40,917 [Worker-496: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 02:07:40,918 [Worker-496: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Lorespitia24\Documentos\Simulación\S4\Caja\restaurant-payBox\src\test\resources
+2020-09-20 02:09:56,475 [Worker-494: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 02:09:56,476 [Worker-494: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-09-20 02:09:56,478 [Worker-494: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-09-20 02:09:56,479 [Worker-494: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 02:09:56,480 [Worker-494: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Lorespitia24\Documentos\Simulación\S4\Caja\restaurant-payBox\src\test\resources
+2020-09-20 02:15:21,974 [Worker-493: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 02:15:21,975 [Worker-493: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-09-20 02:15:21,977 [Worker-493: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-09-20 02:15:21,979 [Worker-493: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 02:15:21,979 [Worker-493: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Lorespitia24\Documentos\Simulación\S4\Caja\restaurant-payBox\src\test\resources
+2020-09-20 02:24:16,530 [Worker-487: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 02:24:16,532 [Worker-487: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-09-20 02:24:16,534 [Worker-487: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-09-20 02:24:16,536 [Worker-487: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 02:24:16,536 [Worker-487: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Lorespitia24\Documentos\Simulación\S4\Caja\restaurant-payBox\src\test\resources
+2020-09-20 02:27:50,275 [Worker-493: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 02:27:50,276 [Worker-493: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-09-20 02:27:50,278 [Worker-493: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-09-20 02:27:50,280 [Worker-493: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 02:27:50,280 [Worker-493: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Lorespitia24\Documentos\Simulación\S4\Caja\restaurant-payBox\src\test\resources
+2020-09-20 02:28:21,217 [Worker-496: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 02:28:21,219 [Worker-496: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-09-20 02:28:21,221 [Worker-496: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-09-20 02:28:21,223 [Worker-496: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 02:28:21,224 [Worker-496: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Lorespitia24\Documentos\Simulación\S4\Caja\restaurant-payBox\src\test\resources
+2020-09-20 02:30:35,997 [Worker-496: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 02:30:35,998 [Worker-496: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-09-20 02:30:36,000 [Worker-496: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-09-20 02:30:36,002 [Worker-496: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 02:30:36,002 [Worker-496: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Lorespitia24\Documentos\Simulación\S4\Caja\restaurant-payBox\src\test\resources
+2020-09-20 02:36:26,702 [Worker-501: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 02:36:26,704 [Worker-501: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-09-20 02:36:26,707 [Worker-501: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-09-20 02:36:26,708 [Worker-501: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 02:36:26,709 [Worker-501: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Lorespitia24\Documentos\Simulación\S4\Caja\restaurant-payBox\src\test\resources
+2020-09-20 02:39:49,945 [Worker-487: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 02:39:49,946 [Worker-487: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-09-20 02:39:49,949 [Worker-487: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-09-20 02:39:49,950 [Worker-487: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 02:39:49,950 [Worker-487: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Lorespitia24\Documentos\Simulación\S4\Caja\restaurant-payBox\src\test\resources
+2020-09-20 02:39:53,457 [Worker-496: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 02:39:53,458 [Worker-496: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-09-20 02:39:53,475 [Worker-496: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-09-20 02:39:53,476 [Worker-496: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 02:39:53,477 [Worker-496: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Lorespitia24\Documentos\Simulación\S4\Caja\restaurant-payBox\src\test\resources
+2020-09-20 02:41:04,303 [Worker-503: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 02:41:04,304 [Worker-503: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-09-20 02:41:04,306 [Worker-503: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-09-20 02:41:04,307 [Worker-503: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-09-20 02:41:04,308 [Worker-503: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Lorespitia24\Documentos\Simulación\S4\Caja\restaurant-payBox\src\test\resources
