@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>Agregar Lista de Ordenes </h1>
+
+<textarea name="textarea" rows="100" cols="50"></textarea>
+<br>
+<button name="button">Generar Factura</button>
+
+</body>
+</html>

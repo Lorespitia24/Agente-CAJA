@@ -1,5 +1,6 @@
 package com.restaurant.payBox.REST;
 
+import java.awt.PageAttributes.MediaType;
 import java.io.Console;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -67,7 +68,7 @@ private Logger logger = LogManager.getLogger(LinkController.class);
 	 * Este metodo me crea el cajero del restaurante con su jornada de trabajo
 	 * @return
 	 */
-	@GetMapping
+	@GetMapping (produces = {org.springframework.http.MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<ATM> createATM() {
 		ATM atm = new ATM();
 		atm.setIdAtm(1);
@@ -78,35 +79,36 @@ private Logger logger = LogManager.getLogger(LinkController.class);
 	}
 	
 	
-	@PostMapping("/createOrder")
+	@PostMapping(consumes = {org.springframework.http.MediaType.APPLICATION_JSON_VALUE},
+			produces = {org.springframework.http.MediaType.APPLICATION_JSON_VALUE}, path = "/createOrder")
 	public ResponseEntity<OrderClient> createPlate(@RequestBody OrderClient url) {
 //		OrderClient orderClient2 = restTemplate.getForObject("https://"+url, OrderClient.class);
 		return billService.createOrder(url);
 	}
 	
-	@PostMapping("/createBill")
+	@PostMapping(produces = {org.springframework.http.MediaType.APPLICATION_JSON_VALUE}, path ="/createBill")
 	public ResponseEntity<Bill> createPlate(@RequestBody List<OrderClient> orderClientList) {
 		return billService.createBill(orderClientList);
 	}
 	
-	@GetMapping("/getAllOrders")
+	@GetMapping(produces = {org.springframework.http.MediaType.APPLICATION_JSON_VALUE}, path ="/getAllOrders")
 	public ResponseEntity<List<OrderClient>> getAllOrders() {
 	return billService.getAllOrdersClient();
 	}
 	
-	@GetMapping("/totalBill")
+	@GetMapping(produces = {org.springframework.http.MediaType.APPLICATION_JSON_VALUE}, path ="/totalBill")
 	public ResponseEntity<List<Bill>> totalRestaurant() {
 		return billService.getAllBills();
 	}
+//	
+//	@GetMapping("/totalIncome")
+//	public void totalIncome(){
+//		logger.debug("message"+ billService.totalRestaurantIncome(billService.getAllBills().getBody()).toString());
+//
+//		
+//	}
 	
-	@GetMapping("/totalIncome")
-	public void totalIncome(){
-		logger.debug("message"+ billService.totalRestaurantIncome(billService.getAllBills().getBody()).toString());
-
-		
-	}
-	
-	@GetMapping("/waiterTips")
+	@GetMapping(produces = {org.springframework.http.MediaType.APPLICATION_JSON_VALUE}, path ="/waiterTips")
 	public ResponseEntity<List<Waiter>> waiterTips(){
 		return billService.getAllWaitEntity();
 	}
