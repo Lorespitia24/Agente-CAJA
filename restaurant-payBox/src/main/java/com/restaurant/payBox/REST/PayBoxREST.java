@@ -49,7 +49,6 @@ private BillService billService;
 public PayBoxREST(BillService billService) {
 	this.billService = billService;
 }
-private Logger logger = LogManager.getLogger(LinkController.class);
 
 	
 	@Autowired
@@ -86,16 +85,30 @@ private Logger logger = LogManager.getLogger(LinkController.class);
 		return billService.createOrder(url);
 	}
 	
+	/**
+	 * Este metodo crea facturas
+	 * @param orderClientList
+	 * @return
+	 */
 	@PostMapping(produces = {org.springframework.http.MediaType.APPLICATION_JSON_VALUE}, path ="/createBill")
-	public ResponseEntity<Bill> createPlate(@RequestBody List<OrderClient> orderClientList) {
+	public ResponseEntity<Bill> createBill(@RequestBody List<OrderClient> orderClientList) {
 		return billService.createBill(orderClientList);
 	}
+	
+	/**
+	 * traer ordenes 
+	 * @return
+	 */
 	
 	@GetMapping(produces = {org.springframework.http.MediaType.APPLICATION_JSON_VALUE}, path ="/getAllOrders")
 	public ResponseEntity<List<OrderClient>> getAllOrders() {
 	return billService.getAllOrdersClient();
 	}
 	
+	/**
+	 * este metodo trae las facturas
+	 * @return
+	 */
 	@GetMapping(produces = {org.springframework.http.MediaType.APPLICATION_JSON_VALUE}, path ="/totalBill")
 	public ResponseEntity<List<Bill>> totalRestaurant() {
 		return billService.getAllBills();
@@ -107,6 +120,11 @@ private Logger logger = LogManager.getLogger(LinkController.class);
 //
 //		
 //	}
+	
+	/**
+	 * Este metodo trae los meseros
+	 * @return
+	 */
 	
 	@GetMapping(produces = {org.springframework.http.MediaType.APPLICATION_JSON_VALUE}, path ="/waiterTips")
 	public ResponseEntity<List<Waiter>> waiterTips(){

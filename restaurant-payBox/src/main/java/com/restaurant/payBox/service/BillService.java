@@ -196,7 +196,7 @@ public class BillService {
 			for (OrderClient orderClient : bill.get(i).getOrderClientList()) {
 				if (bill.get(i).isTips() == true) {
 					if (orderClient.getWaiter().getWaiter() == 1) {
-						System.out.println("--> Aqui"+total);
+//						System.out.println("--> Aqui"+total);
 						setTips(waiterDAO.findByWaiter(1), total);
 					}else if (orderClient.getWaiter().getWaiter() == 2) {
 						setTips(waiterDAO.findByWaiter(2), total);
@@ -215,7 +215,7 @@ public class BillService {
 	}
 
 	/**
-	 * Este metodo calcula la propina del cajero
+	 * Este metodo calcula la propina del mesero
 	 */
 	public double calculateTipWaiter(double total) {
 		double totalTip = 0;
@@ -223,6 +223,9 @@ public class BillService {
 		return totalTip;
 	}
 
+	/**
+	 * este metodo caltula el total de calificación de cada mesero
+	 */
 	public void calculateScoreWaiter() {
 		List<Waiter> waiters = waiterDAO.findAll();
 		int total1 = 0;
